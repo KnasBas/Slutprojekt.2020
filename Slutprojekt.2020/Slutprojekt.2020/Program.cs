@@ -20,7 +20,14 @@ namespace Slutprojekt._2020
 
             IRestResponse response = client.Get(request);
 
-            Console.WriteLine(response.Content);
+            JokeAPI TestJoke = JsonConvert.DeserializeObject<JokeAPI>(response.Content);
+
+            for (int i = 0; i < TestJoke.Joke.Count; i++)
+            {
+                Console.WriteLine(TestJoke.Joke[i]);
+            }
+
+         
 
             Console.ReadLine();
         }
