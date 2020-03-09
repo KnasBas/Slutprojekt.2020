@@ -14,22 +14,38 @@ namespace Slutprojekt._2020
     {
         static void Main(string[] args)
         {
+
+            Rooms r1 = new Rooms();
+           
+            Random generator = new Random();
+
+            int amount = generator.Next(1, 5);
+
+            List<Rooms> r1List = new List<Rooms>(amount);
+
+
+
+
+
+
+
+
+
+
+
             RestClient client = new RestClient("https://official-joke-api.appspot.com/");
 
-            RestRequest request = new RestRequest("jokes/random");
-
-            IRestResponse response = client.Get(request);
-
-            JokeAPI TestJoke = JsonConvert.DeserializeObject<JokeAPI>(response.Content);
-
-            for (int i = 0; i < TestJoke.Joke.Count; i++)
-            {
-                Console.WriteLine(TestJoke.Joke[i]);
+            while(1 > 0) 
+            { 
+                RestRequest request = new RestRequest("jokes/random");
+                IRestResponse response = client.Get(request);
+                JokeAPI RandomJoke = JsonConvert.DeserializeObject<JokeAPI>(response.Content);
+                Console.WriteLine(RandomJoke.setup);
+                Console.ReadKey();
+                Console.WriteLine(RandomJoke.punchline);        
+                Console.ReadLine();
             }
-
-         
-
-            Console.ReadLine();
+            
         }
     }
 }
