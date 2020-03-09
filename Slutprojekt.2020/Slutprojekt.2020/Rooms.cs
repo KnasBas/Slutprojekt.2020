@@ -31,5 +31,10 @@ namespace Slutprojekt._2020
             amountOfFights = generator.Next(1, maxAmountOfFights);
         }
 
+        public void EnterRoom()
+        {
+            Console.WriteLine("You enter: The " + roomName);
+        }
+
     }
 }
