@@ -13,7 +13,7 @@ namespace Slutprojekt._2020
 
         public void GetItemStats()
         {
-            
+            Console.WriteLine();
         }
     }
 }

@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 namespace Slutprojekt._2020
 {
     class Player : Character
-    {     
-        private static Random generator = new Random();        
-
+    {           
         public Player()
         {
             strength = generator.Next(1, 11); //1 till 10 chans på alla parameterar
