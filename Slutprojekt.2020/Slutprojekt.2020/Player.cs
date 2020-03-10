@@ -6,26 +6,16 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt._2020
 {
-    class Player
-    {
-        public string name;
-
-        private int strength;
-
-        private int intelligence;
-
-        private int hp;
-
-        private int maxHp = 150;
-
-        private static Random generator = new Random();
+    class Player : Character
+    {     
+        private static Random generator = new Random();        
 
         public Player()
         {
-           strength = generator.Next(1, 11); //1 till 10 chans på alla parameterar
+            strength = generator.Next(1, 11); //1 till 10 chans på alla parameterar
             Console.WriteLine("Adventurer you start with " + strength + " strength points");
             Console.ReadKey();
-           intelligence = generator.Next(1, 11);
+            intelligence = generator.Next(1, 11);
             Console.WriteLine("Adventurer you start with " + intelligence + " intelligence");
             Console.ReadKey();
             Console.WriteLine("...");

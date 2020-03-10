@@ -14,7 +14,6 @@ namespace Slutprojekt._2020
     {
         static void Main(string[] args)
         {
-            Items i1 = new Items();
             Player p1 = new Player();
 
             Console.WriteLine("Now state your name Adventurer");
@@ -23,15 +22,19 @@ namespace Slutprojekt._2020
             p1.name = answer;
             Console.WriteLine(p1.name + ", I wish you the best of luck on your journey.");
 
-            Rooms r1 = new Rooms();
-           
             Random generator = new Random();
 
-            int amount = generator.Next(1, 5);
+            int amount = generator.Next(2, 11);
 
             List<Rooms> r1List = new List<Rooms>(amount);
 
-            Console.WriteLine("Now, confirm which room of the dungeon you whish to start with, [1 - 5]");
+            for (int i = 0; i < amount + 1; i++)
+            {
+                r1List.Add(new Rooms());
+            }
+
+            Console.WriteLine("Now, confirm which room of the dungeon you whish to start with, [1 - " + amount + "]");
+            Console.Write("[Input choice]: ");
             answer = Console.ReadLine();
             int room;
             bool resultOfAnswer = int.TryParse(answer, out room);
@@ -42,30 +45,24 @@ namespace Slutprojekt._2020
                 resultOfAnswer = int.TryParse(answer, out room);
             }
 
-            r1.EnterRoom();
-
-            i1.GetItemStats();
-
-
-
-
-
+            r1List[room].EnterRoom();
 
             Console.ReadLine();
 
+            
             RestClient client = new RestClient("https://official-joke-api.appspot.com/");
 
-            while(1 > 0) 
-            { 
+            while (1 > 0)
+            {
                 RestRequest request = new RestRequest("jokes/random");
                 IRestResponse response = client.Get(request);
                 JokeAPI RandomJoke = JsonConvert.DeserializeObject<JokeAPI>(response.Content);
                 Console.WriteLine(RandomJoke.setup);
                 Console.ReadKey();
-                Console.WriteLine(RandomJoke.punchline);        
+                Console.WriteLine(RandomJoke.punchline);
                 Console.ReadLine();
             }
-            
+
         }
     }
 }

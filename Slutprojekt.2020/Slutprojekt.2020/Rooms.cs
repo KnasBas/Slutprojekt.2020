@@ -8,15 +8,15 @@ namespace Slutprojekt._2020
 {
     class Rooms
     {
-        private int treasureChance;
+        private float treasureChance;
 
-        private int maxTreasureChance = 1;
+        private float maxTreasureChance = 1.0f;
 
         private int amountOfFights;
 
         private int maxAmountOfFights = 5;
 
-        private List<string> roomNameList = new List<string>() { "Jail", "Kitchen", "Attic", "Basement" };
+        private List<string> roomNameList = new List<string>() { "Jail", "Kitchen", "Attic", "Basement", "Vault", "Throne room", "Laboratory", "" };
 
         private string roomName;
 
@@ -26,7 +26,7 @@ namespace Slutprojekt._2020
         {
             roomName = roomNameList[generator.Next(1, roomNameList.Count())];
 
-            treasureChance = generator.Next(1, maxTreasureChance);
+            treasureChance = (float) generator.NextDouble() * maxTreasureChance;
 
             amountOfFights = generator.Next(1, maxAmountOfFights);
         }
