@@ -36,11 +36,12 @@ namespace Slutprojekt._2020
             }
 
             Console.WriteLine("Now, confirm which room of the dungeon you whish to start with, [1 - " + amount + "]");
+            Console.Write("[Input choice]: ");
 
-            while(winCondition == 0)
+            while (winCondition == 0)
             {
-                Console.Write("[Input choice]: ");
                 int room = CheckRoom();
+
                 int anyFight = r1List[room].EnterRoom();
                 if (anyFight == 1)
                 {
@@ -50,20 +51,35 @@ namespace Slutprojekt._2020
                 }
                 else
                 {
-                    if (r1List[room].InitialLoot == 10)
+                    /*if(r1List[room].InitialLoot == 10)
                     {
-                        i1.GetRandomItem();
+
+                    }*/
+
+                    i1.GetRandomItem();
+                    Console.WriteLine("Do you wish to view the item, yes(1) no(2)");
+                    answer = Console.ReadLine();
+                    int choice = 0;
+                    bool result = int.TryParse(answer, out choice);
+                    while (!result || choice > 2 && choice < 1)
+                    {
+                        Console.WriteLine("Try again");
+                        answer = Console.ReadLine();
+                        result = int.TryParse(answer, out choice);
+                    }
+                    if(choice == 1)
+                    {
+                        i1.GetItemStats();
                     }
                 }
             }
-
             
 
-
+           
 
             Console.ReadLine();
 
-
+            
             RestClient client = new RestClient("https://official-joke-api.appspot.com/");
 
             while (1 > 0)
@@ -82,7 +98,7 @@ namespace Slutprojekt._2020
         static int CheckRoom()
         {
             string answer = Console.ReadLine();
-            int room;
+            int room = 0;
             bool resultOfAnswer = int.TryParse(answer, out room);
             while (!resultOfAnswer || room > 5 && room < 1)
             {

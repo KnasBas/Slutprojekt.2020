@@ -49,7 +49,7 @@ namespace Slutprojekt._2020
                     }
                 }
 
-                Console.WriteLine("");
+                Console.WriteLine(Sword);
             }
 
             
@@ -59,7 +59,7 @@ namespace Slutprojekt._2020
 
         public void GetRandomItem()
         {
-            int temp = generator.Next(1, (itemListTotal.Count + 1));
+            int temp = generator.Next(1, (itemListTotal.Count));
             Console.WriteLine("You got: " + itemListTotal[temp] + " as your item.");
             playerItems.Add(itemListTotal[temp]);
             Sword = (1, "Bonus Strength", generator.Next(1, 11), true);

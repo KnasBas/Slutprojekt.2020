@@ -40,8 +40,5 @@ namespace Slutprojekt._2020
             Console.WriteLine("You enter: The " + roomName);
             return generator.Next(2);
         }
-
-        public int 
-
     }
 }
