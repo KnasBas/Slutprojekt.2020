@@ -23,7 +23,6 @@ namespace Slutprojekt._2020
             {
                 return ValueList;
             }
-
             set 
             {
                 ValueList.Add(id.ToString());

@@ -12,17 +12,36 @@ namespace Slutprojekt._2020
 
         private string roomName;
 
+        private int initialLootChance;
+
+        public int InitialLoot
+        {
+            get
+            {
+                return initialLootChance;
+            }
+
+            set
+            {
+
+            }
+        }
+
         private static Random generator = new Random();
 
         public Rooms()
         {
+            initialLootChance = generator.Next(1, 11); //1 - 10 Chans
             roomName = roomNameList[generator.Next(1, roomNameList.Count())];
         }
 
-        public void EnterRoom()
+        public int EnterRoom()
         {
             Console.WriteLine("You enter: The " + roomName);
+            return generator.Next(2);
         }
+
+        public int 
 
     }
 }

@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Character.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="JokeAPI.cs" />
     <Compile Include="Player.cs" />
