@@ -57,6 +57,12 @@ namespace Slutprojekt._2020
 
         }
 
+        public void GetItemSword()
+        {
+            playerItems.Add("Sword");
+            Sword = (1, "Bonus Strength", generator.Next(1, 11), true);
+        }
+
         public void GetRandomItem()
         {
             int temp = generator.Next(1, (itemListTotal.Count));

@@ -42,11 +42,22 @@ namespace Slutprojekt._2020
             {
                 int room = CheckRoom();
 
-                int anyFight = r1List[room].EnterRoom();
-                if (anyFight == 1)
+                int doesFightOccur = r1List[room].EnterRoom();
+                doesFightOccur = 1;
+                if (doesFightOccur == 1)
                 {
                     Enemy e1 = new Enemy();
-                    Console.WriteLine("Unfortunately you encounter a enemy who's ready to fight " + e1.name);
+                    Console.WriteLine("Unfortunately you encounter a enemy who's ready to fight, a" + e1.name);
+                    int turncounter = 0;
+                    while (e1.HP > 0 && p1.HP > 0)
+                    {
+                        turncounter++;
+                        Console.WriteLine("Input your aproach for the current turn. [turn: " + turncounter + "]");
+                        e1.Hurt(p1.GetCharacterDamage(p1.GetCharacterAttackStyle()));
+                        Console.WriteLine("Press any key to proceed");
+                        Console.ReadKey();
+                        p1.Hurt(e1.GetCharacterDamage(e1.GetCharacterAttackStyle()));
+                    }
 
                 }
                 else

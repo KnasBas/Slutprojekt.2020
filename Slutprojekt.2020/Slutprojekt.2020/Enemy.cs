@@ -22,6 +22,8 @@ namespace Slutprojekt._2020
         {
             int temp = generator.Next(1, enemyType.Count + 1);
 
+            hp = generator.Next(100, maxHp);
+
             name = enemyType[temp];
 
             treasureChance = (float)generator.NextDouble() * maxTreasureChance;
@@ -30,30 +32,38 @@ namespace Slutprojekt._2020
 
             switch (temp)
             {
-                case 1:
+                case 1: //Skeleton
                     intelligence = generator.Next(1, 3);
                     strength = generator.Next(1, 11);
                     hp = generator.Next(hp, maxHp + 1);
                     break;
 
-                case 2:
+                case 2: //Zombie
                     intelligence = generator.Next(1, 1);
                     strength = generator.Next(5, 15);
                     hp = generator.Next(hp, maxHp + 1);
                     break;
 
-                case 3:
+                case 3: //Ghost
                     intelligence = generator.Next(1, 10);
                     strength = generator.Next(1, 10);
                     hp = generator.Next(hp, maxHp + 1);
                     break;
 
-                case 4:
+                case 4: //Giant
                     intelligence = generator.Next(1, 5);
                     strength = generator.Next(5, 15);
                     hp = generator.Next(hp, maxHp + 1);
                     break;
             }
+        }
+
+        public override int GetCharacterAttackStyle()
+        {
+            List<string> attackStyleList = new List<string>() { "[Offense]", "[Defence]" };
+            int temp = generator.Next(2);
+            Console.WriteLine(name + " chose " + attackStyleList[temp] + " as their attackstyle.");
+            return temp;
         }
 
         public int GetNumberOfFights()

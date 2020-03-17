@@ -16,6 +16,9 @@ namespace Slutprojekt._2020
             intelligence = generator.Next(1, 11);
             Console.WriteLine("Adventurer you start with " + intelligence + " intelligence");
             Console.ReadKey();
+            hp = generator.Next(100, maxHp);
+            Console.WriteLine("Adventurer you start with " + hp + " healthpoints");
+            Console.ReadKey();
             Console.WriteLine("...");
         }
     }
