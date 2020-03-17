@@ -47,7 +47,7 @@ namespace Slutprojekt._2020
                 if (doesFightOccur == 1)
                 {
                     Enemy e1 = new Enemy();
-                    Console.WriteLine("Unfortunately you encounter a enemy who's ready to fight, a" + e1.name);
+                    Console.WriteLine("Unfortunately you encounter a enemy who's ready to fight, [" + e1.name + "]");
                     int turncounter = 0;
                     while (e1.HP > 0 && p1.HP > 0)
                     {
@@ -57,6 +57,26 @@ namespace Slutprojekt._2020
                         Console.WriteLine("Press any key to proceed");
                         Console.ReadKey();
                         p1.Hurt(e1.GetCharacterDamage(e1.GetCharacterAttackStyle()));
+                        Console.WriteLine("Press any key to proceed");
+                        Console.ReadKey();
+                        Console.WriteLine("Do you wish to see the current stats of each fighter before next the following turn?");
+                        Console.WriteLine("yes(1)/no(2)");
+                        answer = Console.ReadLine();
+                        int temp = 0;
+                        bool showStats = int.TryParse(answer, out temp);
+                        while(!showStats || temp != 1 && temp != 2)
+                        {
+                            Console.WriteLine("Wrong input!");
+                            answer = Console.ReadLine();
+                            showStats = int.TryParse(answer, out temp);
+                        }
+                        if (temp == 1)
+                        {
+                            p1.GetCharacterStas();
+                            e1.GetCharacterStas();
+                            Console.WriteLine("Press any key to proceed");
+                            Console.ReadKey();
+                        }
                     }
 
                 }

@@ -20,7 +20,7 @@ namespace Slutprojekt._2020
        
         public Enemy()
         {
-            int temp = generator.Next(1, enemyType.Count + 1);
+            int temp = generator.Next(enemyType.Count);
 
             hp = generator.Next(100, maxHp);
 

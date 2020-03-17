@@ -26,18 +26,15 @@ namespace Slutprojekt._2020
             {
                 return hp;
             }
-            set 
-            { 
-
-            }
+            set { }
         }
 
         public void GetCharacterStas()
         {
-            Console.WriteLine(name);
-            Console.WriteLine(hp);
-            Console.WriteLine(strength);
-            Console.WriteLine(intelligence);       
+            Console.WriteLine("Fighter: " + name);
+            Console.WriteLine("HP [" + hp + "]");
+            Console.WriteLine("Strength [" + strength + "]");
+            Console.WriteLine("Intelligence [" + intelligence + "]");       
         }
 
         public virtual int GetCharacterAttackStyle()
@@ -68,21 +65,21 @@ namespace Slutprojekt._2020
             int dmg = 0;
             switch (amount)
             {
-                case 0: //Offense
+                case 1: //Offense
                     if (criticalChance >= 15)
                     {
-                        dmg = generator.Next(strength, strength + 5);
+                        dmg = generator.Next(strength, (strength + 5));
                         dmg = dmg * 2;
                         Console.WriteLine(name + " does " + dmg + " points of damage.");
                     }
                     else
                     {
-                        dmg = generator.Next(strength, strength + 5);
+                        dmg = generator.Next(strength, (strength + 5));
                         Console.WriteLine(name + " does " + dmg + " points of damage.");
                     }            
                     break;
 
-                case 1: //Defence
+                case 2: //Defence
                     if (criticalChance >= 15)
                     {
                         dmg = generator.Next(1, strength);

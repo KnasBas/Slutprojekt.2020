@@ -10,10 +10,10 @@ namespace Slutprojekt._2020
     {           
         public Player()
         {
-            strength = generator.Next(1, 11); //1 till 10 chans på alla parameterar
+            strength = generator.Next(5, 11); //1 till 10 chans på alla parameterar
             Console.WriteLine("Adventurer you start with " + strength + " strength points");
             Console.ReadKey();
-            intelligence = generator.Next(1, 11);
+            intelligence = generator.Next(5, 11);
             Console.WriteLine("Adventurer you start with " + intelligence + " intelligence");
             Console.ReadKey();
             hp = generator.Next(100, maxHp);
