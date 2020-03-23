@@ -10,6 +10,7 @@ namespace Slutprojekt._2020
     {
         private (int, string, int, bool) Sword = (1, "Bonus Strength", 10, false); //Försöker bygga upp ett item sytem via ID samt behålla dess stats/syfte
         private (int, string, int, bool) Headband = (2, "Bonus Intelligence", 10, false);
+        private int hpPotions = 0;
 
         static Random generator = new Random();
 
@@ -56,6 +57,39 @@ namespace Slutprojekt._2020
 
 
         }
+
+        public int GetHpPotion()
+        {
+            int success = 0;
+
+            if(hpPotions > 0)
+            {
+                success = 1;
+                Console.WriteLine("You have " + hpPotions + " hp potions, do you wish to use one?");
+                Console.WriteLine("Remember that it can only heal 35 points and that it can not excede an hp amount of 150.");
+                Console.Write("yes(1)/no(2)");
+                string answer = Console.ReadLine();
+                int choice = 0;
+                bool result = int.TryParse(answer, out choice);
+                while (!result || choice > 2 && choice < 1)
+                {
+                    Console.WriteLine("Try again");
+                    answer = Console.ReadLine();
+                    result = int.TryParse(answer, out choice);
+                }
+                if(choice == 1)
+                {
+                    hpPotions--;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You do not own any hp potions.");
+            }
+
+            return success;
+        }
+
 
         public void GetItemSword()
         {

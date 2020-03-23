@@ -8,7 +8,7 @@ namespace Slutprojekt._2020
 {
     class Rooms
     {
-        private List<string> roomNameList = new List<string>() { "Jail", "Kitchen", "Attic", "Basement", "Vault", "Throne room", "Laboratory", "" };
+        private List<string> roomNameList = new List<string>() { "Jail", "Kitchen", "Attic", "Basement", "Vault", "Throne room", "Laboratory"};
 
         private string roomName;
 

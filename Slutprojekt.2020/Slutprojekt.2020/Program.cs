@@ -35,13 +35,18 @@ namespace Slutprojekt._2020
                 r1List.Add(new Rooms());
             }
 
-            Console.WriteLine("Now, confirm which room of the dungeon you whish to start with, [1 - " + amount + "]");
-            Console.Write("[Input choice]: ");
+            Console.WriteLine("Now, confirm which room of the dungeon you whish to start with. Remeber that you must clear all the rooms to achieve victory.");
+           
 
             while (winCondition == 0)
             {
-                int room = CheckRoom();
-
+                int room = CheckRoom(amount);
+                amount = amount - 1;
+                if(amount <= 0)
+                {
+                    amount = 0;
+                    winCondition = 1;
+                }
                 int doesFightOccur = r1List[room].EnterRoom();
                 doesFightOccur = 1;
                 if (doesFightOccur == 1)
@@ -53,33 +58,60 @@ namespace Slutprojekt._2020
                     {
                         turncounter++;
                         Console.WriteLine("Input your aproach for the current turn. [turn: " + turncounter + "]");
-                        e1.Hurt(p1.GetCharacterDamage(p1.GetCharacterAttackStyle()));
-                        Console.WriteLine("Press any key to proceed");
-                        Console.ReadKey();
-                        p1.Hurt(e1.GetCharacterDamage(e1.GetCharacterAttackStyle()));
-                        Console.WriteLine("Press any key to proceed");
-                        Console.ReadKey();
-                        Console.WriteLine("Do you wish to see the current stats of each fighter before next the following turn?");
-                        Console.WriteLine("yes(1)/no(2)");
-                        answer = Console.ReadLine();
-                        int temp = 0;
-                        bool showStats = int.TryParse(answer, out temp);
-                        while(!showStats || temp != 1 && temp != 2)
+                        int action = p1.GetCharacterAttackStyle();
+                        if(action == 3) ///Hela denna del behöver ändras för att fungera
                         {
-                            Console.WriteLine("Wrong input!");
-                            answer = Console.ReadLine();
-                            showStats = int.TryParse(answer, out temp);
+                            int temp = i1.GetHpPotion();
+
+                            if(temp == 0)
+                            {
+                                while(p1.GetCharacterAttackStyle() == 3)
+                                {
+                                    action = p1.GetCharacterAttackStyle();
+                                    i1.GetHpPotion();
+                                    Console.ReadKey();
+                                }
+                            }
                         }
-                        if (temp == 1)
+                        e1.Hurt(p1.GetCharacterDamage(action));
+                        Console.WriteLine("Press any key to proceed");
+                        Console.ReadKey();
+                        if(e1.HP > 0)
                         {
-                            p1.GetCharacterStas();
-                            e1.GetCharacterStas();
+                            p1.Hurt(e1.GetCharacterDamage(e1.GetCharacterAttackStyle()));
                             Console.WriteLine("Press any key to proceed");
                             Console.ReadKey();
+                            Console.WriteLine("Do you wish to see the current stats of each fighter before next the following turn?");
+                            Console.WriteLine("yes(1)/no(2)");
+                            answer = Console.ReadLine();
+                            int temp = 0;
+                            bool showStats = int.TryParse(answer, out temp);
+                            while (!showStats || temp != 1 && temp != 2)
+                            {
+                                Console.WriteLine("Wrong input!");
+                                answer = Console.ReadLine();
+                                showStats = int.TryParse(answer, out temp);
+                            }
+                            if (temp == 1)
+                            {
+                                p1.GetCharacterStas();
+                                e1.GetCharacterStas();
+                                Console.WriteLine("Press any key to proceed");
+                                Console.ReadKey();
+                            }
                         }
                     }
-
+                    if (e1.HP <= 0)
+                    {
+                        Console.WriteLine("You won the battle.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You died!");
+                        winCondition = 2;
+                    }
                 }
+
                 else
                 {
                     /*if(r1List[room].InitialLoot == 10)
@@ -103,6 +135,16 @@ namespace Slutprojekt._2020
                         i1.GetItemStats();
                     }
                 }
+
+                if(winCondition == 1)
+                {
+                    Console.WriteLine("You won the game!");
+                }
+                else if(winCondition == 2)
+                {
+                    Console.WriteLine("You lost the game");
+                }
+
             }
             
 
@@ -126,8 +168,10 @@ namespace Slutprojekt._2020
 
         }
 
-        static int CheckRoom()
+        static int CheckRoom(int amount)
         {
+            Console.WriteLine("[1 - " + amount + "]");
+            Console.Write("[Input choice]: ");
             string answer = Console.ReadLine();
             int room = 0;
             bool resultOfAnswer = int.TryParse(answer, out room);
@@ -137,7 +181,7 @@ namespace Slutprojekt._2020
                 answer = Console.ReadLine();
                 resultOfAnswer = int.TryParse(answer, out room);
             }
-
+            
             return room;
         }
     }

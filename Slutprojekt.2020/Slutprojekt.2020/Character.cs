@@ -39,11 +39,11 @@ namespace Slutprojekt._2020
 
         public virtual int GetCharacterAttackStyle()
         {
-            Console.WriteLine(" {Offence [1]}/ {Defence [2]}");
+            Console.WriteLine(" {Offence [1]}/ {Defence [2]}/ {Use a HealthPotion[3]}");
             string input = Console.ReadLine();
             int temp = 0;
             bool result = int.TryParse(input, out temp);
-            while(!result || temp != 1 && temp != 2)
+            while(!result || temp != 1 && temp != 2 && temp != 3)
             {
                 Console.WriteLine("Wrong input!");
                 input = Console.ReadLine();
@@ -99,6 +99,10 @@ namespace Slutprojekt._2020
         public int Hurt(int amount)
         {
             hp = hp - amount;
+            if(hp <= 0)
+            {
+                hp = 0;
+            }
             Console.WriteLine(name + " takes damage and now has " + hp + "hp left");
             return hp;
         }
