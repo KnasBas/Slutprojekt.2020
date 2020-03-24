@@ -57,28 +57,28 @@ namespace Slutprojekt._2020
                     while (e1.HP > 0 && p1.HP > 0)
                     {
                         turncounter++;
-                        Console.WriteLine("Input your aproach for the current turn. [turn: " + turncounter + "]");
+                        Console.WriteLine("Input your approach for the current turn. [turn: " + turncounter + "]");
                         int action = p1.GetCharacterAttackStyle();
-                        if(action == 3) ///Hela denna del behöver ändras för att fungera
-                        {
-                            int temp = i1.GetHpPotion();
 
-                            if(temp == 0)
-                            {
-                                while(p1.GetCharacterAttackStyle() == 3)
-                                {
-                                    action = p1.GetCharacterAttackStyle();
-                                    i1.GetHpPotion();
-                                    Console.ReadKey();
-                                }
-                            }
+                        while(action == 3 && i1.GetAmountOfPotions() == 0)
+                        {
+                            action = p1.GetCharacterAttackStyle();
                         }
+
+                        if(action == 3 && i1.GetAmountOfPotions() > 0)
+                        {
+                            p1.IncreaseHealth(i1.BuyHpPotion());
+                        }
+                        
                         e1.Hurt(p1.GetCharacterDamage(action));
                         Console.WriteLine("Press any key to proceed");
                         Console.ReadKey();
+
                         if(e1.HP > 0)
                         {
-                            p1.Hurt(e1.GetCharacterDamage(e1.GetCharacterAttackStyle()));
+                            action = e1.GetCharacterAttackStyle();
+                            p1.Hurt(e1.GetCharacterDamage(action));
+
                             Console.WriteLine("Press any key to proceed");
                             Console.ReadKey();
                             Console.WriteLine("Do you wish to see the current stats of each fighter before next the following turn?");

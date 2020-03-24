@@ -10,21 +10,30 @@ namespace Slutprojekt._2020
     {
         public string name;
 
-        protected int strength;
-
-        protected int intelligence;
-
-        protected int hp;
+        protected Dictionary<string, int> CharacterStats = new Dictionary<string, int>();     
 
         protected int maxHp = 150;
 
         protected static Random generator = new Random();
 
+        /*protected int strength;
+
+        protected int intelligence;*/
+
+        //protected int hp;
+
+        public Character()
+        {
+            CharacterStats.Add("Hp", 100);
+            CharacterStats.Add("Strength", 0);
+            CharacterStats.Add("Intelligence", 0);
+        }
+
         public int HP 
         { 
             get 
             {
-                return hp;
+                return CharacterStats["Hp"];
             }
             set { }
         }
@@ -32,14 +41,14 @@ namespace Slutprojekt._2020
         public void GetCharacterStas()
         {
             Console.WriteLine("Fighter: " + name);
-            Console.WriteLine("HP [" + hp + "]");
-            Console.WriteLine("Strength [" + strength + "]");
-            Console.WriteLine("Intelligence [" + intelligence + "]");       
+            Console.WriteLine("HP [" + CharacterStats["Hp"] + "]");
+            Console.WriteLine("Strength [" + CharacterStats["Strength"] + "]");
+            Console.WriteLine("Intelligence [" + CharacterStats["Intelligence"] + "]");       
         }
 
         public virtual int GetCharacterAttackStyle()
         {
-            Console.WriteLine(" {Offence [1]}/ {Defence [2]}/ {Use a HealthPotion[3]}");
+            Console.WriteLine("{Offense [1]}/ {Defence [2]}/ {HealthPotion [3]}");
             string input = Console.ReadLine();
             int temp = 0;
             bool result = int.TryParse(input, out temp);
@@ -56,8 +65,11 @@ namespace Slutprojekt._2020
         public int GetCharacterDamage(int amount)
         {
             int criticalChance;
+
             int temp = generator.Next(1, 10);
-            criticalChance = temp + intelligence;
+
+            criticalChance = temp + CharacterStats["Intelligence"];
+
             if (criticalChance >= 15)
             {
                 Console.WriteLine("This turn " + name + " were smart enough to get a critical hit!");
@@ -68,13 +80,13 @@ namespace Slutprojekt._2020
                 case 1: //Offense
                     if (criticalChance >= 15)
                     {
-                        dmg = generator.Next(strength, (strength + 5));
+                        dmg = generator.Next(CharacterStats["Strength"], (CharacterStats["Strength"] + 5));
                         dmg = dmg * 2;
                         Console.WriteLine(name + " does " + dmg + " points of damage.");
                     }
                     else
                     {
-                        dmg = generator.Next(strength, (strength + 5));
+                        dmg = generator.Next(CharacterStats["Strength"], (CharacterStats["Strength"] + 5));
                         Console.WriteLine(name + " does " + dmg + " points of damage.");
                     }            
                     break;
@@ -82,29 +94,44 @@ namespace Slutprojekt._2020
                 case 2: //Defence
                     if (criticalChance >= 15)
                     {
-                        dmg = generator.Next(1, strength);
+                        dmg = generator.Next(1, CharacterStats["Strength"]);
                         dmg = dmg * 2;
                         Console.WriteLine(name + " does " + dmg + " points of damage.");
                     }
                     else
                     {
-                        dmg = generator.Next(1, strength);
+                        dmg = generator.Next(1, CharacterStats["Strength"]);
                         Console.WriteLine(name + " does " + dmg + " points of damage.");
                     }
                     break;
-            }  
+            }
+
             return dmg;
+        }
+
+        public int IncreaseHealth(int amount)
+        {
+            if(amount == 1)
+            {
+                CharacterStats["Hp"] = CharacterStats["Hp"] + 30;
+                if(CharacterStats["Hp"] > maxHp)
+                {
+                    CharacterStats["Hp"] = maxHp;
+                }
+                Console.WriteLine("You heal for 30 points of hp, you have now " + CharacterStats["Hp"] + "hp");
+            }
+            return CharacterStats["Hp"];
         }
 
         public int Hurt(int amount)
         {
-            hp = hp - amount;
-            if(hp <= 0)
+            CharacterStats["Hp"] = CharacterStats["Hp"] - amount;
+            if(CharacterStats["Hp"] <= 0)
             {
-                hp = 0;
+                CharacterStats["Hp"] = 0;
             }
-            Console.WriteLine(name + " takes damage and now has " + hp + "hp left");
-            return hp;
+            Console.WriteLine(name + " takes damage and now has " + CharacterStats["Hp"] + "hp left");
+            return CharacterStats["Hp"];
         }
     }
 }

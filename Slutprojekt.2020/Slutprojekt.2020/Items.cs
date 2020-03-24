@@ -52,13 +52,19 @@ namespace Slutprojekt._2020
 
                 Console.WriteLine(Sword);
             }
-
-            
-
-
         }
 
-        public int GetHpPotion()
+        public int GetAmountOfPotions()
+        {
+            if(hpPotions == 0)
+            {
+                Console.WriteLine("You do not own any hp potions.");
+            }
+
+            return hpPotions;
+        }
+
+        public int BuyHpPotion()
         {
             int success = 0;
 

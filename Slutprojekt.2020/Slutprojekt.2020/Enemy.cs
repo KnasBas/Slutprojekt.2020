@@ -22,7 +22,7 @@ namespace Slutprojekt._2020
         {
             int temp = generator.Next(enemyType.Count);
 
-            hp = generator.Next(100, maxHp);
+            CharacterStats["Hp"] = generator.Next(100, maxHp);
 
             name = enemyType[temp];
 
@@ -33,35 +33,35 @@ namespace Slutprojekt._2020
             switch (temp)
             {
                 case 1: //Skeleton
-                    intelligence = generator.Next(1, 3);
-                    strength = generator.Next(1, 11);
-                    hp = generator.Next(hp, maxHp + 1);
+                    CharacterStats["Intelligence"] = generator.Next(1, 3);
+                    CharacterStats["Strength"] = generator.Next(1, 11);
+                    CharacterStats["Hp"] = generator.Next(CharacterStats["Hp"], maxHp + 1);
                     break;
 
                 case 2: //Zombie
-                    intelligence = generator.Next(1, 1);
-                    strength = generator.Next(5, 15);
-                    hp = generator.Next(hp, maxHp + 1);
+                    CharacterStats["Intelligence"] = generator.Next(1, 1);
+                    CharacterStats["Strength"] = generator.Next(5, 15);
+                    CharacterStats["Hp"] = generator.Next(CharacterStats["Hp"], maxHp + 1);
                     break;
 
                 case 3: //Ghost
-                    intelligence = generator.Next(1, 10);
-                    strength = generator.Next(1, 10);
-                    hp = generator.Next(hp, maxHp + 1);
+                    CharacterStats["Intelligence"] = generator.Next(1, 10);
+                    CharacterStats["Strength"] = generator.Next(1, 10);
+                    CharacterStats["Hp"] = generator.Next(CharacterStats["Hp"], maxHp + 1);
                     break;
 
                 case 4: //Giant
-                    intelligence = generator.Next(1, 5);
-                    strength = generator.Next(5, 15);
-                    hp = generator.Next(hp, maxHp + 1);
+                    CharacterStats["Intelligence"] = generator.Next(1, 5);
+                    CharacterStats["Strength"] = generator.Next(5, 15);
+                    CharacterStats["Hp"] = generator.Next(CharacterStats["Hp"], maxHp + 1);
                     break;
             }
         }
 
         public override int GetCharacterAttackStyle()
         {
-            List<string> attackStyleList = new List<string>() { "[Offense]", "[Defence]" };
-            int temp = generator.Next(2);
+            List<string> attackStyleList = new List<string>() {"", "[Offense]", "[Defence]" };
+            int temp = generator.Next(1,3);
             Console.WriteLine(name + " chose " + attackStyleList[temp] + " as their attackstyle.");
             return temp;
         }
