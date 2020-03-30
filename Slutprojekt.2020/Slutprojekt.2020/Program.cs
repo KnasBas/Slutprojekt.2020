@@ -14,23 +14,23 @@ namespace Slutprojekt._2020
     {
         static void Main(string[] args)
         {
-            Player p1 = new Player();
+            Player p1 = new Player(); //två klasser som skapas tidigt för att köra deras konstruktorer samt tillgänglighet. 
             Items i1 = new Items();
-            int winCondition = 0;
+            int winCondition = 0; //variabeln används för att checka spelarens vinst eller förlust
 
             Console.WriteLine("Now state your name Adventurer");
             Console.Write("[Input name]: ");
             string answer = Console.ReadLine();
-            p1.name = answer;
+            p1.name = answer; //anropar name från Player klassen
             Console.WriteLine(p1.name + ", I wish you the best of luck on your journey.");
 
-            Random generator = new Random();
+            Random generator = new Random(); //slump generator
 
-            int amount = generator.Next(2, 11);
+            int amount = generator.Next(2, 11); //
 
             List<Rooms> r1List = new List<Rooms>(amount);
 
-            for (int i = 0; i < amount + 1; i++)
+            for (int i = 0; i < amount + 1; i++) //skapar x antal rum utifrån generatorn i detta fall
             {
                 r1List.Add(new Rooms());
             }
@@ -48,7 +48,12 @@ namespace Slutprojekt._2020
                     winCondition = 1;
                 }
                 int doesFightOccur = r1List[room].EnterRoom();
-                doesFightOccur = 1;
+                doesFightOccur = 0;
+                if(doesFightOccur == 0)
+                {
+                    i1.GetItem();
+                    i1.GetItemStats();
+                }
                 if (doesFightOccur == 1)
                 {
                     Enemy e1 = new Enemy();

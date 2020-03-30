@@ -24,7 +24,7 @@ namespace Slutprojekt._2020
 
         public Character()
         {
-            CharacterStats.Add("Hp", 100);
+            CharacterStats.Add("Hp", 100); //Här konstateras bas värden för en karaktär.
             CharacterStats.Add("Strength", 0);
             CharacterStats.Add("Intelligence", 0);
         }
