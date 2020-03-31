@@ -5,9 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 using Newtonsoft.Json;
-
-
-
 namespace Slutprojekt._2020
 {
     class Program
@@ -24,32 +21,42 @@ namespace Slutprojekt._2020
             p1.name = answer; //anropar name från Player klassen
             Console.WriteLine(p1.name + ", I wish you the best of luck on your journey.");
 
-            Random generator = new Random(); //slump generator
+            Console.WriteLine("Now, choose how many dungeon rooms you wish to explore.");
+            Console.WriteLine("But remeber that you enter them in turn, [1 - x]");
+            Console.Write("Input your choice: ");
 
-            int amount = generator.Next(2, 11); //
+            string amountString = Console.ReadLine();
+            int amount;
+            bool roomCheck = int.TryParse(amountString, out amount);
 
-            List<Rooms> r1List = new List<Rooms>(amount);
+            while(!roomCheck || amount<= 1)
+            {
+                Console.WriteLine("Invalid input, try again");
+                Console.Write("Input your choice:");
+                amountString = Console.ReadLine();
+                roomCheck = int.TryParse(amountString, out amount);
+            }
+
+            //List<Rooms> r1List = new List<Rooms>(amount);
+            Queue<Rooms> r1Queue = new Queue<Rooms>();
 
             for (int i = 0; i < amount + 1; i++) //skapar x antal rum utifrån generatorn i detta fall
             {
-                r1List.Add(new Rooms());
-            }
-
-            Console.WriteLine("Now, confirm which room of the dungeon you whish to start with. Remeber that you must clear all the rooms to achieve victory.");
-           
+                r1Queue.Enqueue(new Rooms());
+            }    
 
             while (winCondition == 0)
             {
-                int room = CheckRoom(amount);
-                amount = amount - 1;
-                if(amount <= 0)
+                //int room = CheckRoom(amount);
+                //amount = amount - 1;
+                if (amount <= 0)
                 {
                     amount = 0;
                     winCondition = 1;
                 }
-                int doesFightOccur = r1List[room].EnterRoom();
-                doesFightOccur = 0;
-                if(doesFightOccur == 0)
+                int doesFightOccur = r1Queue.Dequeue().EnterRoom();
+                //doesFightOccur = 0;
+                if (doesFightOccur == 0)
                 {
                     i1.GetItem();
                     i1.GetItemStats();
@@ -65,21 +72,21 @@ namespace Slutprojekt._2020
                         Console.WriteLine("Input your approach for the current turn. [turn: " + turncounter + "]");
                         int action = p1.GetCharacterAttackStyle();
 
-                        while(action == 3 && i1.GetAmountOfPotions() == 0)
+                        while (action == 3 && i1.GetAmountOfPotions() == 0)
                         {
                             action = p1.GetCharacterAttackStyle();
                         }
 
-                        if(action == 3 && i1.GetAmountOfPotions() > 0)
+                        if (action == 3 && i1.GetAmountOfPotions() > 0)
                         {
                             p1.IncreaseHealth(i1.BuyHpPotion());
                         }
-                        
+
                         e1.Hurt(p1.GetCharacterDamage(action));
                         Console.WriteLine("Press any key to proceed");
                         Console.ReadKey();
 
-                        if(e1.HP > 0)
+                        if (e1.HP > 0)
                         {
                             action = e1.GetCharacterAttackStyle();
                             p1.Hurt(e1.GetCharacterDamage(action));
@@ -119,11 +126,6 @@ namespace Slutprojekt._2020
 
                 else
                 {
-                    /*if(r1List[room].InitialLoot == 10)
-                    {
-
-                    }*/
-
                     i1.GetRandomItem();
                     Console.WriteLine("Do you wish to view the item, yes(1) no(2)");
                     answer = Console.ReadLine();
@@ -135,41 +137,38 @@ namespace Slutprojekt._2020
                         answer = Console.ReadLine();
                         result = int.TryParse(answer, out choice);
                     }
-                    if(choice == 1)
+                    if (choice == 1)
                     {
                         i1.GetItemStats();
                     }
                 }
 
-                if(winCondition == 1)
+                if (winCondition == 1)
                 {
                     Console.WriteLine("You won the game!");
                 }
-                else if(winCondition == 2)
+                else if (winCondition == 2)
                 {
                     Console.WriteLine("You lost the game");
                 }
 
             }
-            
 
-           
+            GetJoke();
 
             Console.ReadLine();
+        }
 
-            
+        static void GetJoke()
+        {
             RestClient client = new RestClient("https://official-joke-api.appspot.com/");
-
-            while (1 > 0)
-            {
-                RestRequest request = new RestRequest("jokes/random");
-                IRestResponse response = client.Get(request);
-                JokeAPI RandomJoke = JsonConvert.DeserializeObject<JokeAPI>(response.Content);
-                Console.WriteLine(RandomJoke.setup);
-                Console.ReadKey();
-                Console.WriteLine(RandomJoke.punchline);
-                Console.ReadLine();
-            }
+            RestRequest request = new RestRequest("jokes/random");
+            IRestResponse response = client.Get(request);
+            JokeAPI RandomJoke = JsonConvert.DeserializeObject<JokeAPI>(response.Content);
+            Console.WriteLine(RandomJoke.setup);
+            Console.ReadKey();
+            Console.WriteLine(RandomJoke.punchline);
+            Console.ReadLine();
 
         }
 
@@ -186,7 +185,7 @@ namespace Slutprojekt._2020
                 answer = Console.ReadLine();
                 resultOfAnswer = int.TryParse(answer, out room);
             }
-            
+
             return room;
         }
     }
