@@ -54,6 +54,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="JokeAPI.cs" />
+    <Compile Include="NPC.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

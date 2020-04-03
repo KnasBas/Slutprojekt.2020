@@ -8,10 +8,10 @@ using Newtonsoft.Json;
 
 namespace Slutprojekt._2020
 {
-    class JokeAPI
+    class JokeAPI //denna klass kommer få en utökad funktion
     {
         public int id;
-        public string type;
+        public string type; //publika parameterar
         public string setup;
         public string punchline;
 

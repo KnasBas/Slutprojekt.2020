@@ -8,13 +8,13 @@ namespace Slutprojekt._2020
 {
     class Character
     {
-        public string name;
+        public string name; //namn
 
-        protected Dictionary<string, int> CharacterStats = new Dictionary<string, int>();     
+        protected Dictionary<string, int> CharacterStats = new Dictionary<string, int>();    //Jag använder en dictionary eftersom den kan använda en string som index men innehåller int värden, mycket praktisk för att hålla int parameterar på ett ställe. 
 
         protected int maxHp = 150;
 
-        protected static Random generator = new Random();
+        protected static Random generator = new Random(); //generator
 
         /*protected int strength;
 
@@ -33,12 +33,12 @@ namespace Slutprojekt._2020
         { 
             get 
             {
-                return CharacterStats["Hp"];
+                return CharacterStats["Hp"]; //returnerar karaktärens nuvarande hp.
             }
-            set { }
+            set { } //behöver ingen set
         }
 
-        public void GetCharacterStas()
+        public void GetCharacterStas() //skriver ut stats
         {
             Console.WriteLine("Fighter: " + name);
             Console.WriteLine("HP [" + CharacterStats["Hp"] + "]");
@@ -46,28 +46,27 @@ namespace Slutprojekt._2020
             Console.WriteLine("Intelligence [" + CharacterStats["Intelligence"] + "]");       
         }
 
-        public virtual int GetCharacterAttackStyle()
+        public virtual int GetCharacterAttackStyle() //här är en metod för att hämta en input från spelaren om vilken attackstil hen vill ha under den rundan av striden.
         {
-            Console.WriteLine("{Offense [1]}/ {Defence [2]}/ {HealthPotion [3]}");
+            Console.WriteLine("{Offense [1]}/ {Defence [2]}/ {HealthPotion [3]}"); //alternativ
             string input = Console.ReadLine();
-            int temp = 0;
+            int temp = 0; //temporär parameter
             bool result = int.TryParse(input, out temp);
-            while(!result || temp != 1 && temp != 2 && temp != 3)
+            while(!result || temp != 1 && temp != 2 && temp != 3) //felsökning
             {
                 Console.WriteLine("Wrong input!");
-                input = Console.ReadLine();
-                result = int.TryParse(input, out temp);
+                input = Console.ReadLine(); //tillåter spelaren att inte göra fel och behöver därför skriva in ett giltigt alternativ.
+                result = int.TryParse(input, out temp); 
             }
 
             return temp;
         }
 
-        public int GetCharacterDamage(int amount)
+        public int GetCharacterDamage(int amount) //hämtar ett värde från main, (attackstil)
         {
             int criticalChance;
 
-            int temp = generator.Next(1, 10);
-
+            int temp = generator.Next(1, 10);                //en int temp används för att skapa ett chans system med att karaktären har en chans att gör mer skada
             criticalChance = temp + CharacterStats["Intelligence"];
 
             if (criticalChance >= 15)
@@ -78,7 +77,7 @@ namespace Slutprojekt._2020
             switch (amount)
             {
                 case 1: //Offense
-                    if (criticalChance >= 15)
+                    if (criticalChance >= 15) //Case 1 och 2 innehåller två olika utfall, skillnaden är att den första är när karaktären lyckas få en critical hit.
                     {
                         dmg = generator.Next(CharacterStats["Strength"], (CharacterStats["Strength"] + 5));
                         dmg = dmg * 2;
@@ -109,12 +108,12 @@ namespace Slutprojekt._2020
             return dmg;
         }
 
-        public int IncreaseHealth(int amount)
+        public int IncreaseHealth(int amount) //metoden samarbetar med en metod från item klassen, UseHealthPotion.
         {
             if(amount == 1)
             {
-                CharacterStats["Hp"] = CharacterStats["Hp"] + 30;
-                if(CharacterStats["Hp"] > maxHp)
+                CharacterStats["Hp"] = CharacterStats["Hp"] + 30; //Ökar hp
+                if(CharacterStats["Hp"] > maxHp) //får inte överskrida maxhp värdet
                 {
                     CharacterStats["Hp"] = maxHp;
                 }
@@ -123,14 +122,25 @@ namespace Slutprojekt._2020
             return CharacterStats["Hp"];
         }
 
-        public int Hurt(int amount)
+        public int Hurt(int amount, int style)
         {
-            CharacterStats["Hp"] = CharacterStats["Hp"] - amount;
-            if(CharacterStats["Hp"] <= 0)
+            if(style == 2) //när style är 2 har karaktären valt defence för rundan vilket betyder att skadan minskas.
             {
-                CharacterStats["Hp"] = 0;
+                CharacterStats["Hp"] = CharacterStats["Hp"] - (amount/2);
+                if (CharacterStats["Hp"] <= 0)
+                {
+                    CharacterStats["Hp"] = 0; //tillåter inte hp att gå under 0
+                }
             }
-            Console.WriteLine(name + " takes damage and now has " + CharacterStats["Hp"] + "hp left");
+            else
+            {
+                CharacterStats["Hp"] = CharacterStats["Hp"] - amount;
+                if (CharacterStats["Hp"] <= 0)
+                {
+                    CharacterStats["Hp"] = 0;
+                }
+                Console.WriteLine(name + " takes damage and now has " + CharacterStats["Hp"] + "hp left");
+            }       
             return CharacterStats["Hp"];
         }
     }

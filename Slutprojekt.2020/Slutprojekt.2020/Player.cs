@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt._2020
 {
-    class Player : Character
+    class Player : NPC
     {           
         public Player() //I konstruktorn ändras dictionary variabler från klassen character via en generator 
         {

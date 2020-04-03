@@ -10,19 +10,19 @@ namespace Slutprojekt._2020
     {
         private List<string> enemyType = new List<string>() {"Skeleton" , "Zombie", "Ghost", "Giant" };
 
-        private float treasureChance;
-
-        private float maxTreasureChance = 1.0f;
-
-        private int amountOfFights;
-
-        private int maxAmountOfFights = 5;
+        private float treasureChance;           //
+                                                //
+        private float maxTreasureChance = 1.0f; //
+                                                // dessa har ingen funktion ännu
+        private int amountOfFights;             //
+                                                // 
+        private int maxAmountOfFights = 5;      //
        
         public Enemy()
         {
             int temp = generator.Next(enemyType.Count);
 
-            CharacterStats["Hp"] = generator.Next(100, maxHp);
+            CharacterStats["Hp"] = generator.Next(100, maxHp); //här slumpas hp
 
             name = enemyType[temp];
 
@@ -30,7 +30,7 @@ namespace Slutprojekt._2020
 
             amountOfFights = generator.Next(1, maxAmountOfFights);
 
-            switch (temp)
+            switch (temp) //en swicth som skapar en fiende beroende på vad temp fick för värde
             {
                 case 1: //Skeleton
                     CharacterStats["Intelligence"] = generator.Next(1, 3);
@@ -58,7 +58,7 @@ namespace Slutprojekt._2020
             }
         }
 
-        public override int GetCharacterAttackStyle()
+        public override int GetCharacterAttackStyle() //eftersom fienden inte är kontrollerad så slumpas attackstilen
         {
             List<string> attackStyleList = new List<string>() {"", "[Offense]", "[Defence]" };
             int temp = generator.Next(1,3);
@@ -66,12 +66,12 @@ namespace Slutprojekt._2020
             return temp;
         }
 
-        public int GetNumberOfFights()
+        public int GetNumberOfFights() //Har inte en funktion ännu
         {
             return amountOfFights;
         }
 
-        public bool GetLoot()
+        public bool GetLoot() //Har inte en funktion ännu
         {
             if(treasureChance >= 0.5f)
             {
