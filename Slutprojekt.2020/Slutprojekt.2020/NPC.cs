@@ -9,7 +9,7 @@ namespace Slutprojekt._2020
     class NPC : Character
     {
         private List<string> npcNames = new List<string>() { "George", "Harry", "Edward" };
-        string npcname = "";
+        private string npcname = "";
         public NPC()
         {
             npcname = npcNames[generator.Next(npcNames.Count)];
