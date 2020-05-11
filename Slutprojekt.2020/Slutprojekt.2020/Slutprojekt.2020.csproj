@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Character.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Fight.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="JokeAPI.cs" />
     <Compile Include="NPC.cs" />

@@ -38,12 +38,22 @@ namespace Slutprojekt._2020
             set { } //behöver ingen set
         }
 
-        public void GetCharacterStas() //skriver ut stats
+        public void TransferStats(Dictionary<string, int> value)
+        {
+            CharacterStats = value;
+        }
+
+        public void GetCharacterStats() //skriver ut stats
         {
             Console.WriteLine("Fighter: " + name);
             Console.WriteLine("HP [" + CharacterStats["Hp"] + "]");
             Console.WriteLine("Strength [" + CharacterStats["Strength"] + "]");
             Console.WriteLine("Intelligence [" + CharacterStats["Intelligence"] + "]");       
+        }
+
+        public Dictionary<string, int> ReturnStats()
+        {
+            return CharacterStats;
         }
 
         public virtual int GetCharacterAttackStyle() //här är en metod för att hämta en input från spelaren om vilken attackstil hen vill ha under den rundan av striden.
@@ -131,6 +141,7 @@ namespace Slutprojekt._2020
                 {
                     CharacterStats["Hp"] = 0; //tillåter inte hp att gå under 0
                 }
+                Console.WriteLine(name + " takes damage and now has " + CharacterStats["Hp"] + "hp left");
             }
             else
             {
@@ -143,5 +154,11 @@ namespace Slutprojekt._2020
             }       
             return CharacterStats["Hp"];
         }
+
+        public virtual int PerformJoke()
+        {
+            return 0;
+        }
+
     }
 }

@@ -34,7 +34,8 @@ namespace Slutprojekt._2020
         {
             initialLootChance = generator.Next(1, 11); //1 - 10 Chans //som sagt fugnerar fortfarande inte
             roomName = roomNameList[generator.Next(1, roomNameList.Count())]; //generar ett namn för rummet
-            npcOccurance = generator.Next(1, 11); // 1 - 10 
+            npcOccurance = generator.Next(1, 11); // 1 - 10
+            //npcOccurance = 10;
         }
         
 
@@ -47,7 +48,7 @@ namespace Slutprojekt._2020
             }
             else
             {
-                return generator.Next(2);  // detta värde används i Main för att rulla en 50% risk att spelaren hamnar i en strid.
+                return 1;  // detta värde används i Main för att rulla en 50% risk att spelaren hamnar i en strid.
             }                          
         }
     }

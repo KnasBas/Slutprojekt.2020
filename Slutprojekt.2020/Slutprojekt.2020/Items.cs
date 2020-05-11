@@ -9,7 +9,7 @@ namespace Slutprojekt._2020
     class Items //Item system
     {
         //Försöker bygga upp ett item sytem via ID samt behålla dess stats/syfte    
-        private int hpPotions = 0;
+        private int hpPotions = 5;
 
         static Random generator = new Random();
         List<string> itemListTotal = new List<string>() { "Sword", "Headband" , "Leatherboots", "Staff", "Belt"};

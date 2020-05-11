@@ -15,7 +15,7 @@ namespace Slutprojekt._2020
             npcname = npcNames[generator.Next(npcNames.Count)];
         }
 
-        public int PerformJoke() //En metod som används när en parameter från room klassen har ett specifikt värde triggas denna metod i main.
+        public override int PerformJoke() //En metod som används när en parameter från room klassen har ett specifikt värde triggas denna metod i main.
         {
             Console.WriteLine("You see a person in the room, you try to approach the person.");
             Console.ReadKey();
