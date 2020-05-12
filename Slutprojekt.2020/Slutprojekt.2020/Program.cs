@@ -55,8 +55,8 @@ namespace Slutprojekt._2020
                 {
                     Enemy e1 = new Enemy();
                     Fight f1 = new Fight();
-                    f1.GetStats(p1.ReturnStats());
-                    int x = f1.StartFight(p1, e1, i1);
+                    f1.GetStats(p1.ReturnStats()); //ett system för att överföra spelarens stats till fight klassen.
+                    int x = f1.StartFight(p1, e1, i1); //en metod från fight klassen utspelas och värdet utifrån olika utfall ger vinst eller förlust.
                     if (x == 1) { Console.WriteLine("You won the battle."); winterms = 1; }
                     else //enkla arguemnt om vem som vann striden
                     {
@@ -120,43 +120,6 @@ namespace Slutprojekt._2020
             Console.ReadKey();
             Console.WriteLine(RandomJoke.punchline);
             Console.ReadKey();
-
         }
-
-        /*else //denna har inte en ful använding ännu eftersom item systemet krånglar, men annars fungerande kod
-            {
-                i1.GetRandomItem();
-                Console.WriteLine("Do you wish to view the item, yes(1) no(2)");
-                answer = Console.ReadLine();
-                int choice = 0;
-                bool result = int.TryParse(answer, out choice);
-                while (!result || choice > 2 && choice < 1)
-                {
-                    Console.WriteLine("Try again");
-                    answer = Console.ReadLine();
-                    result = int.TryParse(answer, out choice);
-                }
-                if (choice == 1)
-                {
-                    i1.GetItemStats();
-                }
-            }*/
-
-        /*static int CheckRoom(int amount) //Den här koden fungerar fortfarande men det har inte något syfte längre eftersom jag valde att byta min list till en queue istället, ville dock inte radera den.
-        {
-            Console.WriteLine("[1 - " + amount + "]");
-            Console.Write("[Input choice]: ");
-            string answer = Console.ReadLine();
-            int room = 0;
-            bool resultOfAnswer = int.TryParse(answer, out room);
-            while (!resultOfAnswer || room > 5 && room < 1) //felsökningsmetod
-            {
-                Console.WriteLine("Wrong answer, try again");
-                answer = Console.ReadLine();
-                resultOfAnswer = int.TryParse(answer, out room);
-            }
-
-            return room;
-        }*/
     }
 }

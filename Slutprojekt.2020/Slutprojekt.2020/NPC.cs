@@ -34,7 +34,6 @@ namespace Slutprojekt._2020
             return temp;
         }
     }
-
 }
 
                 
