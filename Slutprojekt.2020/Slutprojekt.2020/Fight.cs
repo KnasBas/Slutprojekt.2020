@@ -29,7 +29,7 @@ namespace Slutprojekt._2020
             return value1;
         }
 
-        public int StartFight(Player p1, Enemy e1, Items i1)
+        public void StartFight(Player p1, Enemy e1, Items i1)
         {
             Console.WriteLine("Unfortunately you encounter a enemy who's ready to fight, [" + e1.name + "]");
 
@@ -84,20 +84,17 @@ namespace Slutprojekt._2020
                 }
             }
 
-            int temporary = 0;
-
             if (e1.HP <= 0)
             {
                 Console.WriteLine("You won the battle.");
-                temporary = 1;
+                p1.SetPlayerWinTerms(1);
             }
             else //enkla arguemnt om vem som vann striden
             {
                 Console.WriteLine("You died!");
-                temporary = 2; //du dog och spelet avslutas
+                p1.SetPlayerWinCondition(2);
+                p1.isGameOver(false);//du dog och spelet avslutas
             }
-
-            return temporary;
         }
     }
 }

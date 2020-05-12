@@ -16,17 +16,11 @@ namespace Slutprojekt._2020
 
         protected static Random generator = new Random(); //generator
 
-        /*protected int strength;
-
-        protected int intelligence;*/
-
-        //protected int hp;
-
         public Character()
         {
             CharacterStats.Add("Hp", 100); //Här konstateras bas värden för en karaktär.
-            CharacterStats.Add("Strength", 0);
-            CharacterStats.Add("Intelligence", 0);
+            CharacterStats.Add("Strength", 1);
+            CharacterStats.Add("Intelligence", 1);
         }
 
         public int HP 
@@ -68,7 +62,6 @@ namespace Slutprojekt._2020
                 input = Console.ReadLine(); //tillåter spelaren att inte göra fel och behöver därför skriva in ett giltigt alternativ.
                 result = int.TryParse(input, out temp); 
             }
-
             return temp;
         }
 
